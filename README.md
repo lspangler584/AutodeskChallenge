@@ -37,6 +37,7 @@ Future - Build as an executable, parameterize input files and location of output
 * Publish the .dll to AWS S3 and set access permissions for allowed uses/users.
 * Publish the .dll to Azure Blob Storage, as an Azure Function, or Azure App Service.
 * Google Cloud, etc.
+* Publish as a NuGet package
 
 #### Credits
 

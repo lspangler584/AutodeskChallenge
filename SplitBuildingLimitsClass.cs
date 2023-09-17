@@ -45,11 +45,7 @@ public static class SplitBuildingLimitsClass<TPolygon> where TPolygon : IFeature
                     // in the source (plateau)
                     var elevation = GetPolygonMember<double>(plateau, attributeElevation);
                     feature.Attributes.Add(attributeElevation, elevation);
-
-                    lock (splitLimits)
-                    {
-                        splitLimits.Add(feature);
-                    }
+                    splitLimits.Add(feature);
                 }
             }
         });

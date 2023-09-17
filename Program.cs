@@ -11,11 +11,14 @@ public class Program
     private static readonly string BuildingLimitsFilePath = "../../../samples/SampleBuildingLimits.json";
     private static readonly string SampleHeightPlateausFilePath = "../../../samples/SampleHeightPlateaus.json";
     private static readonly string SplitLimitsFilePath = "../../../samples/SplitLimits.json";
+    private static object writeLock = new object();
 
     private static string ReadFile(string filePath)
     {
         string text;
-        var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+        var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None);
+
         using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
         {
             text = streamReader.ReadToEnd();
@@ -41,7 +44,7 @@ public class Program
 
     private static void SerializeGeoJson(FeatureCollection features)
     {
-        using (var fileStream = File.Create(SplitLimitsFilePath))
+        using (var fileStream = new FileStream(SplitLimitsFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
         {
             var serializer = GeoJsonSerializer.Create();
             var streamWriter = new StreamWriter(fileStream);
